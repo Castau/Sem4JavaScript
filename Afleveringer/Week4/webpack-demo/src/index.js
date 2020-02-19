@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import './style.css';
+import 'bootstrap/dist/css/bootstrap.css'
 import Icon from './pluto.png';
 import printMe from './print.js';
 
@@ -18,6 +19,9 @@ function component() {
 
     element.appendChild(btn);
     element.appendChild(myIcon);
+
+    const name = 'Rigmor';
+    setTimeout(() => alert(`Hello there from ${name}`), 1000);
     return element;
 }
 

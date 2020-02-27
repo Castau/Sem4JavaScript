@@ -50,9 +50,33 @@ printBookInfo(book1);
 printBookInfo(book2);
 printBookInfo(book3);
 
+class BookJava implements IBook {
+    title: string
+    author: string
+    published: Date
+    pages: number
+    constructor(private _title: string, private _author: string, private _published: Date, private _pages: number) {
+        this.title = _title
+        this.author = _author
+        this.published = _published
+        this.pages = _pages
+     };
+
+    getTitle() { return this._title }
+    setTitle(val: string) { this._title = val }
+
+    getAuthor() { return this._author }
+    setAuthor(val: string) { this._author = val }
+
+    getPublished() { return this._published }
+    setPublished(val: Date) { this._published = val }
+
+    getPages() { return this._pages }
+    setPages(val: number) { this._pages = val }
+}
+
 class Book implements IBook {
     constructor(private _title: string, private _author: string, private _published: Date, private _pages: number) { };
-    //constructor(public title: string, public author: string, public published: Date, public pages: number) { };
 
     get title() { return this._title }
     set title(val: string) { this._title = val }
@@ -68,6 +92,7 @@ class Book implements IBook {
 }
 
 let book4 = new Book('Beacon 23', 'Hugh Howey', new Date('1915-08-12'), 254);
+let book5 = new BookJava('Beacon 23', 'Hugh Howey', new Date('1915-08-12'), 254);
 printBookInfo(book4);
 
 

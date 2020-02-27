@@ -24,6 +24,27 @@ let book3 = {
 printBookInfo(book1);
 printBookInfo(book2);
 printBookInfo(book3);
+class BookJava {
+    constructor(_title, _author, _published, _pages) {
+        this._title = _title;
+        this._author = _author;
+        this._published = _published;
+        this._pages = _pages;
+        this.title = _title;
+        this.author = _author;
+        this.published = _published;
+        this.pages = _pages;
+    }
+    ;
+    getTitle() { return this._title; }
+    setTitle(val) { this._title = val; }
+    getAuthor() { return this._author; }
+    setAuthor(val) { this._author = val; }
+    getPublished() { return this._published; }
+    setPublished(val) { this._published = val; }
+    getPages() { return this._pages; }
+    setPages(val) { this._pages = val; }
+}
 class Book {
     constructor(_title, _author, _published, _pages) {
         this._title = _title;
@@ -32,7 +53,6 @@ class Book {
         this._pages = _pages;
     }
     ;
-    //constructor(public title: string, public author: string, public published: Date, public pages: number) { };
     get title() { return this._title; }
     set title(val) { this._title = val; }
     get author() { return this._author; }
@@ -43,10 +63,32 @@ class Book {
     set pages(val) { this._pages = val; }
 }
 let book4 = new Book('Beacon 23', 'Hugh Howey', new Date('1915-08-12'), 254);
+let book5 = new BookJava('Beacon 23', 'Hugh Howey', new Date('1915-08-12'), 254);
 printBookInfo(book4);
+function func1(val1, val2, val3) {
+    let str = [val1, val2, val3];
+    return str;
+}
+function func2(val1, val2, val3) {
+    let str = [val1, val2, val3];
+    str.forEach((val) => { val.toUpperCase; });
+    return str;
+}
+let f2 = function logger(f1) {
+    //Simulate that we get data from somewhere and uses the provided function
+    let [a, b, c] = ["A", "B", "C"];
+    console.log(f1(a, b, c));
+};
+f2(func1);
+f2(func2);
+function func3(val1) {
+    let str = [val1];
+    return str;
+}
+f2(func3);
 // A) The declaration below defines a Shape class, which as it's only properties has a color field +  a getArea() and a getPerimeter() 
 // function which both returns undefined. This is the closest we get to an abstract method in Java. Provide the class with a nice 
-// (using template literals) toString() method  + a getter/setter for the colour property. Verify that you cannot (why) make an instance of this class.
+// (using template literals (backticks)) toString() method  + a getter/setter for the colour property. Verify that you cannot (why) make an instance of this class.
 class Shape {
     constructor(color) {
         this._color = color;

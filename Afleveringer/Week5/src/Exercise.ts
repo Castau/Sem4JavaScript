@@ -96,6 +96,44 @@ let book5 = new BookJava('Beacon 23', 'Hugh Howey', new Date('1915-08-12'), 254)
 printBookInfo(book4);
 
 
+// a) Create an interface to describe a function: myFunc that should take three string parameters and return a String Array.
+// b) Design a function "implementing" this interface which returns an array with the three strings
+// c) Design another implementation that returns an array, with the three strings uppercased.
+// d) The function, given below, uses the ES - 6(and TypeScript) feature for destructuring Arrays into individual variables, 
+// to simulate a method that uses the interface.
+// e) Test f2 with the two implementations created in b + c.
+// f) Verify that f2 cannot be used with functions that do not obey the myFunc interface
+
+interface myFunc {
+    (val1: string, val2:string, val3:string): string[]
+}
+
+function func1(val1: string, val2: string, val3: string){
+    let str = [val1, val2, val3]
+    return str;
+}
+
+function func2(val1: string, val2: string, val3: string) {
+    let str = [val1, val2, val3]
+    str.forEach((val) => {val.toUpperCase})
+    return str;
+}
+
+let f2 = function logger(f1: myFunc) {
+    //Simulate that we get data from somewhere and uses the provided function
+    let [a, b, c] = ["A", "B", "C"];
+    console.log(f1(a, b, c));
+}
+
+f2(func1)
+f2(func2)
+
+function func3(val1:string) {
+    let str = [val1]
+    return str;
+}
+f2(func3)
+
 // A) The declaration below defines a Shape class, which as it's only properties has a color field +  a getArea() and a getPerimeter() 
 // function which both returns undefined. This is the closest we get to an abstract method in Java. Provide the class with a nice 
 // (using template literals (backticks)) toString() method  + a getter/setter for the colour property. Verify that you cannot (why) make an instance of this class.

@@ -3,8 +3,15 @@
 ### Explain and Reflect:
 * Explain the differences between Java and JavaScript and Java and node. Topics you could include:
   * That Java is a compiled language and JavaScript a scripted language
+    > Scripting languages are interpreted within another program. JavaScript is embedded within a browser and interpreted by that browser.
+    > Java is compiled to bytecode, which is then interpreted and recompiled at runtime  
   * Java is both a language and a platform
+  > Java is a OOP language. The Java Virtual Machine is a platform that provides a managed runtime environment which enables the compiled Java-programs to run on any OS, as JVM is platform-independent. 
   * General differences in language features.
+  > Compiled vs. Interpreted. Java is considered a compiled programming language. JavaScript is considered an interpreted scripting language. The difference is in the implementation: Java is compiled into bytecode and run on a virtual machine, whereas JavaScript can be interpreted directly by a browser in the syntax it is written (or minified)
+  > Static vs Dynamic Type Checking. Java uses static type checking, where the type of a variable is checked at compile-time. JavaScript uses dynamic typing, where type safety is verified at runtime. The primary advantage of static type checking is that type errors are caught early in development, and because the compiler knows exactly what data types are being used, code typically executes faster or uses less memory. The primary advantage of dynamic type checking is a simpler language with shorter declarations.
+  > Concurrency. The ability to handle the execution of several instruction sequences at the same time is handled very differently between Java and JavaScript. Java makes use of multiple threads to perform tasks in parallel. JavaScript, particularly as it exists as Node.js in server-side applications, handles concurrency on one main thread of execution via a queue system called the event loop, and a forking system called Node Clustering. For most use-cases, both methods work just fine, but Java is generally faster because thread to thread memory sharing much faster than interprocess communication (IPC).
+  > Class Based vs Prototype Based. Java follows class based inheritance—a top down, hierarchical, class-based relationship whereby properties are defined in a class and inherited by an instance of that class (one of its members). In JavaScript, inheritance is prototypal—all objects can inherit directly from other objects. Hierarchy is accomplished in JavaScript by assigning an object as a prototype with a constructor function.
   * Blocking vs. non-blocking
 * Explain generally about node.js, when it “makes sense” and npm, and how it “fits” into the node echo system.
 * Explain about the Event Loop in JavaScript, including terms like: blocking, non-blocking, event loop, callback que and "other" API's. Make sure to include why this is relevant for us as developers.
@@ -15,6 +22,7 @@
 * Variable/function-Hoisting
 * `this` in JavaScript and how it differs from what we know from Java/.net.
 * Function Closures and the JavaScript Module Pattern
+* Immediately-Invoked Function Expressions (IIFE)
 * User-defined Callback Functions (writing your own functions that take a callback)
 * Explain the methods `map()`, `filter()` and `reduce()`
 * Provide examples of user-defined reusable modules implemented in Node.js (learnynode - 6)

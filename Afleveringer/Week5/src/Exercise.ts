@@ -98,7 +98,7 @@ printBookInfo(book4);
 
 // A) The declaration below defines a Shape class, which as it's only properties has a color field +  a getArea() and a getPerimeter() 
 // function which both returns undefined. This is the closest we get to an abstract method in Java. Provide the class with a nice 
-// (using template literals) toString() method  + a getter/setter for the colour property. Verify that you cannot (why) make an instance of this class.
+// (using template literals (backticks)) toString() method  + a getter/setter for the colour property. Verify that you cannot (why) make an instance of this class.
 
 abstract class Shape {
     private _color: string;

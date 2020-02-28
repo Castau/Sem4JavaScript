@@ -37,14 +37,14 @@ Explain the differences between Java and JavaScript and Java and node. Topics yo
 * **`this` in JavaScript and how it differs from what we know from Java/.net**
 > In JavaScript 'this' refers to different values depending on where it is used: In a method (a function with an object associated with it), 'this' refers to the owner object. Alone, 'this' refers to the global object. In a function (no object is associated with it), 'this' refers to the global object. In an event, 'this' refers to the element that received the event. In Java, 'this' refers to the current instance object on which the method is executed. All methods are associated with an object in Java.
 * **Function Closures and the JavaScript Module Pattern**
->A closure is a function having access to the parent scope, even after the parent function has closed.
+> A closure is a function having access to the parent scope, even after the parent function has closed.
 ```javascript
 let add = (function () {
   let counter = 0;
   return function () {counter += 1; return counter}
 })();
 ```
->The variable add is assigned the return value of a self-invoking function. The self-invoking function only runs once. It sets the counter 0, and returns a function expression.This way add becomes a function that can access the counter in the parent scope.The counter is protected by the scope of the anonymous function, and can only be changed using the add function.
+> The variable add is assigned the return value of a self-invoking function. The self-invoking function only runs once. It sets the counter 0, and returns a function expression.This way add becomes a function that can access the counter in the parent scope.The counter is protected by the scope of the anonymous function, and can only be changed using the add function.
 
 > JavaScript Module Pattern relies on the next part (IIFE). In stead of using it only on functions, we can create an entire module with private and public functions. 
 ```javascript
@@ -70,9 +70,101 @@ Module.publicMethod();
 })()
 ```
 * **User-defined Callback Functions (writing your own functions that take a callback)**
+```javascript
+function add(n1, n2) {
+    return n1 + n2;
+}
+
+let sub = function (n1, n2) {
+    return n1 - n2
+}
+
+let calculate = function (n1, n2, callback) {
+    return `Result = ${callback(n1, n2)}`;
+};
+
+calculate(5, 8, add) // returns Result = 12 
+```
 * **Explain the methods `map()`, `filter()` and `reduce()`**
+> Map, reduce, and filter are all array methods in JavaScript. Each one will iterate over an array and perform a transformation or computation. Each will return a new array based on the result of the function.
+> The map() method is used for creating a new array from an existing one, applying a function to each one of the elements
+```javascript
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(item => item * 2);
+console.log(doubled); // [2, 4, 6, 8]
+```
+> The filter() method takes each element in an array and it applies a conditional statement against it. If this conditional returns true, the element gets pushed to the output array.
+```javascript
+const numbers = [1, 2, 3, 4];
+const evens = numbers.filter(item => item % 2 === 0);
+console.log(evens); // [2, 4]
+```
+> The reduce() method reduces an array of values down to just one value. To get the output value, it runs a reducer function on each element of the array. The callback argument is a function that will be called once for every item in the array. This function takes four arguments, but often only the first two are used.
+>* accumulator - the returned value of the previous iteration
+>* currentValue - the current item in the array
+>* index - the index of the current item
+>* array - the original array on which reduce was called
+>* initialValue - this is optional. If provided, it will be used as the initial accumulator value in the first call to the callback function.
+```javascript
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce(function (result, item) {
+  return result + item;
+}, 0);
+console.log(sum); // 10
+```
 * **Provide examples of user-defined reusable modules implemented in Node.js (learnynode - 6)**
+```javascript
+// main.js
+const mymodule = require('./mymodule.js')
+const dir = process.argv[2]
+const filter = process.argv[3]
+
+mymodule(dir, filter, function (error, list) {
+  if (error) return console.log(error);
+  list.forEach(function (file) {
+	console.log(file)
+  })
+})
+..............
+// mymodule.js 
+const fs = require('fs')
+const path = require('path')
+
+module.exports = function (dir, filter, callback) {
+  fs.readdir(dir, function (error, list) {
+	if (error) return callback(error);
+	list = list.filter(function (file) {
+	  return path.extname(file) === '.' + filter
+	})
+	callback(null, list)
+  })
+}
+```
 * **Provide examples and explain the es2015 features: `let`, `arrow functions`, `this`, `rest parameters`, `destructuring objects` and `arrays`, `maps`, `sets` etc**
+>  * Variables declared with the let keyword can have Block Scope, which means that variables declared inside a block {} can not be accessed from outside the block, unlike var. let and const variables are not hoisted.
+```javascript
+function func(numb) {
+    let temp = 17;
+    return temp + numb;
+}
+// temp is only accessible in the function-scope
+```
+```javascript
+// ES5
+var multiply = function(a, b) {
+  return a * b;
+};
+// ES6
+const multiply = (a, b) => { return a * b };
+```
+> In JavaScript 'this' refers to different values depending on where it is used: In a method (a function with an object associated with it), 'this' refers to the owner object. Alone, 'this' refers to the global object. In a function (no object is associated with it), 'this' refers to the global object. In an event, 'this' refers to the element that received the event.
+> The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
+```javascript
+function sum(...theArgs) { //.....
+
+console.log(sum(1, 2));
+console.log(sum(1, 2, 3, 4));
+```
 * **Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6**
 * **Explain and demonstrate, how to implement your own events, how to emit events and how to listen for such events**
 

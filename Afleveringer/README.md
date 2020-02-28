@@ -30,7 +30,6 @@ Explain the differences between Java and JavaScript and Java and node. Topics yo
 * **Explain (some) of the purposes with the tools Babel and WebPack and how they differ from each other. Use examples from the exercises**
 > Babel is a transpiler. It can translate all kinds of high version ECMAScript into ES5, which is more widely supported by browsers (especially older versions). It's main job is to turn unsupported or cutting-edge language features into ES5. Webpack is, among other things, a dependency analyzer and module bundler. The general concept is that Webpack packages modules with complex dependency relationships into bundles. When webpack processes dependencies, it must turn everything into javascript because webpack works on top of javascript. As a result, it uses different loaders to translate different types of resources/code into javascript. When we need ES6 or ES7 features, we use babel-loader to accomplish this.
 
-
 ### Explain using sufficient code examples the following features in JavaScript (and node)
 * **Variable/function-Hoisting**
 > Hoisting is the default behaviour, all declarations are moved to the top of the scope (script or function). Assignments are not moved. Because of this, all variable- and value declarations and assignments should be kept together, preferably at the top of the current scope. Functions are hoisted completely. Variables declared with the let keyword can have Block Scope, which means that variables declared inside a block {} can not be accessed from outside the block, unlike var. let and const variables are not hoisted.
@@ -206,7 +205,6 @@ class Circle extends Shape {
     }
 }
 ```
-
 * **Explain and demonstrate, how to implement your own events, how to emit events and how to listen for such events**
 
 ### ES6,7,8,ES-next and TypeScript

@@ -228,22 +228,228 @@ class MyEventPublisher extends EventEmitter {
         }
     }
 }
+const publisher = new MyEventPublisher();
+publisher.on("odd", (n) => console.log(`ODD: ${n.number}`))
+publisher.on("even", (n) => console.log(`EVEN: ${n.number}`))
+publisher.on("low", (n) => console.log(`LOW: ${n.number}`))
+publisher.on("high", (n) => console.log(`HIGH: ${n.number}`))
+publisher.on("high", (n) => console.log(`HIGH: ${n.number}`))
 ```
 
 ### ES6,7,8,ES-next and TypeScript
 * **Provide examples with es-next, running in a browser, using Babel and Webpack**
+> I don't understand what I'm supposed to show in this question
 * **Explain the two strategies for improving JavaScript: Babel and ES6 (es2015) + ES-Next, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers**
+> With babel it's possible to write Javascript in ES6 or newer and have babel transpiling it to ES5 which is supported by most browsers. 
+> Typescript is a highlevel language on top of javascript and also comes with a transpiler like babel. 
 * **Provide a number of examples to demonstrate the benefits of using TypeScript, including, types,  interfaces, classes and generics**
+> See week5 (LINK)
 * **Explain the ECMAScript Proposal Process for how new features are added to the language (the TC39 Process)**
-
+> The TC39 is made up of members who are typically browser vendors and large companies who’ve invested heavily in the web. When a new proposal is created, that proposal has to go through certain stages before it becomes part of the official specification. It’s important to keep in mind that in order for any proposal to move from one stage to another, a consensus among the TC39 must be met. This means that a large majority must agree while nobody strongly disagrees enough to veto a specific proposal. Each new proposal starts off at Stage 0 and moves up through the different stages if the members choose so. If a proposal reaches and completes the final stage, the proposal is ready for inclusion in the formal ECMAScript standard. As of 2016, a new version of ECMAScript is released every year with whatever features are ready at that time. What that means is that any Stage 4 proposals that exist when a new release happens, will be included in the release for that year.
+https://medium.com/free-code-camp/ecmascript-tc39-and-the-history-of-javascript-26067498feb9 LINK
 ### Callbacks, Promises and async/await
 * **Explain about (ES-6) promises in JavaScript including, the problems they solve, a quick explanation of the Promise API and:**
+> A Promise represents the result of an operation that hasn't been completed yet, but will at some point in the future. An example of such an operation is the network request fetch. There is no way to determine when the response will be received. This can be problematic if other operations are dependent on the completion of fetch. Without Promises, we would have to use callbacks to deal with actions that need to happen in sequence. This isn't necessarily a problem if we there's one asynchronous action, but if we need to complete multiple asynchronous steps in sequence, callbacks become unmanageable and result in the infamous callback hell.
+```javascript
+function get(url) {
+  return new Promise(function(resolve, reject) {
+    var req = new XMLHttpRequest();
+    req.open('GET', url);
+    req.onload = function() {
+      if (req.status == 200) { 
+          resolve(req.response); /* PROMISE RESOLVED */
+      } else { 
+          reject(Error(req.statusText)); /* PROMISE REJECTED */
+      }
+    };
+    req.onerror = function() { reject(Error("Network Error")); };
+    req.send();
+  });
+}
+```
   * **Example(s) that demonstrate how to avoid the callback hell (“Pyramid of Doom")**
+```javascript
+function getPlanetforFirstSpeciesInFirstMovieForPerson(id) {
+    let swapiObj = {};
+    fetch('https://swapi.co/api/people/' + id)
+        .then(res => res.json())
+        .then(data => {
+            swapiObj.name = data.name;
+            return data.films[0];
+        })
+        .then(film_url => fetch(film_url))
+        .then(res => res.json())
+        .then(data => {
+            swapiObj['First film'] = data.title;
+            return data.species[0];
+        })
+        .catch(err => console.log('Error: ', err))
+        .finally(() =>
+            console.log('Promises', JSON.stringify(swapiObj, null, '\t'))
+        );
+}
+```
   * **Example(s) that demonstrate how to execute asynchronous (promise-based) code in serial or parallel**
+```javascript
+async function printNamesParallel() {
+    const promise1 = fetchPerson(URL + '1');
+    const promise2 = fetchPerson(URL + '2');
+    (await Promise.all([promise1, promise2])).forEach(result => {
+        console.log(result.name);
+    });
+}
+
+```
   * **Example(s) that demonstrate how to implement our own promise-solutions**
+    ```javascript
+    var myPromise = new Promise(function(resolve, reject) { 
+    const nameA = 'Rigmor' 
+    const nameB = 'Rigmor'
+    if(nameA === nameB) { 
+        resolve(); 
+    } else { 
+        reject(); 
+    }}); 
+
+    myPromise. 
+    then(function () { 
+        console.log('Success'); 
+    }). 
+    catch(function () { 
+        console.log('Some error...'); 
+    }); 
+    ```
+
+
   * **Example(s) that demonstrate error handling with promises**
+  ```javascript
+  async function getPlanetforFirstSpeciesInFirstMovieForPersonAsync(id) {
+    let swapiObj = {};
+    try {
+        const role = await fetch('https://swapi.co/api/people/' + id).then(res => res.json());
+        const firstfilm = await fetch(role.films[0]).then(res => res.json());
+        const firstspecie = await fetch(firstfilm.species[0]).then(res => res.json());
+        const homeworld = await fetch(firstspecie.homeworld).then(res => res.json());
+        swapiObj.name = role.name;
+        swapiObj['First film'] = firstfilm.title;
+        swapiObj['First species'] = firstspecie.name;
+        swapiObj['Homeworld for Specie'] = homeworld.name;
+    } catch (err) {
+        console.log(err);
+    } finally {
+        console.log('Async', JSON.stringify(swapiObj, null, '\t'));
+    }
+  
+  ```
 * **Explain about JavaScripts async/await, how it relates to promises and reasons to use it compared to the plain promise API**
+>* Async/await is a new way to write asynchronous code. Previous alternatives for asynchronous code are callbacks and promises.
+>* Async/await is just syntax sugar built on top of promises. It cannot be used with plain callbacks or node callbacks.
+>* Async/await is, like promises, non-blocking.
+>* Async/await makes asynchronous code look and behave a little more like synchronous code. This is where all its power lies.
+```javascript
+// Plain promise
+const makeRequest = () =>
+  getJSON()
+    .then(data => {
+      console.log(data)
+      return "done"
+    })
+makeRequest()
+
+// async/await
+const makeRequest = async () => {
+  console.log(await getJSON())
+  return "done"
+}
+makeRequest()
+```
+> Any async function returns a promise implicitly, and the resolve value of the promise will be whatever you return from the function.
 **Provide examples to demonstrate**
-* **Why this often is the preferred way of handling promises**
-* **Error handling with async/await**
-* **Serial or parallel execution with async/await**
+  * **Why this often is the preferred way of handling promises**
+    >* Concise and clean, no .then, no nesting
+    >* Async/await makes it finally possible to handle both synchronous and asynchronous errors with the same try/catch.
+    ```javascript
+    // With plain promise
+    const makeRequest = () => {
+        try {
+            getJSON()
+            .then(result => {
+                const data = JSON.parse(result)
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    // With async/await
+    const makeRequest = async () => {
+        try {
+            const data = JSON.parse(await getJSON())
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    ```
+  * **Error handling with async/await**
+  ```javascript
+    // Plain promises
+    const makeRequest = () => {
+        return callAPromise()
+        .then(() => callAPromise())
+        .then(() => callAPromise())
+        .then(() => callAPromise())
+        .then(() => callAPromise())
+        .then(() => {
+            throw new Error("oops");
+        })
+    }
+
+    makeRequest()
+        .catch(err => {
+            console.log(err);
+            // output
+            // Error: oops at callAPromise.then.then.then.then.then (index.js:8:13)
+        })
+
+    // async/await
+    const makeRequest = async () => {
+        await callAPromise()
+        await callAPromise()
+        await callAPromise()
+        await callAPromise()
+        await callAPromise()
+        throw new Error("oops");
+    }
+
+    makeRequest()
+    .catch(err => {
+        console.log(err);
+        // output
+        // Error: oops at makeRequest (index.js:7:9)
+    })
+
+  ```
+  * **Serial or parallel execution with async/await**
+  ```javascript
+    // serial
+    const makeRequest = async () => {
+        const value1 = await promise1()
+        const value2 = await promise2(value1)
+        return promise3(value1, value2)
+    }
+
+    //parallel
+    async function printNamesParallel() {
+        const promise1 = fetchPerson(URL + '1');
+        const promise2 = fetchPerson(URL + '2');
+        (await Promise.all([promise1, promise2])).forEach(result => {
+            console.log(result.name);
+        });
+    }
+
+  ```

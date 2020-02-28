@@ -46,7 +46,29 @@ let add = (function () {
 ```
 >The variable add is assigned the return value of a self-invoking function. The self-invoking function only runs once. It sets the counter 0, and returns a function expression.This way add becomes a function that can access the counter in the parent scope.The counter is protected by the scope of the anonymous function, and can only be changed using the add function.
 
+> JavaScript Module Pattern relies on the next part (IIFE). In stead of using it only on functions, we can create an entire module with private and public functions. 
+```javascript
+var Module = (function () {
+    var privateMethod = function () {
+        // private code
+    };
+    return {
+    publicMethod: function () {
+      // I can call privateMethod()
+    }
+  };
+})();
+
+Module.publicMethod();
+```
+
 * **Immediately-Invoked Function Expressions (IIFE)**
+> Immediately-Invoked Function Expressions (IIFE), pronounced "iffy", are a common JavaScript pattern that executes a function instantly after it's defined. Developers primarily use this pattern to ensure variables are only accessible within the scope of the defined function
+```javascript
+(function() {
+    // Code....
+})()
+```
 * **User-defined Callback Functions (writing your own functions that take a callback)**
 * **Explain the methods `map()`, `filter()` and `reduce()`**
 * **Provide examples of user-defined reusable modules implemented in Node.js (learnynode - 6)**

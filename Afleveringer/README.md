@@ -166,6 +166,47 @@ console.log(sum(1, 2));
 console.log(sum(1, 2, 3, 4));
 ```
 * **Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6**
+> Unlike Java, JS Object inheritance is Prototype based. ES6 classes are just syntactic sugar to make it look similar to OOP languages like Java. Behind the scene, there’s no  class based inheritance but prototype based inheritance.
+>* Class inheritance creates parent/child object taxonomies as a side-effect.
+>* Prototypal Inheritance: A prototype is a working object instance. Objects inherit directly from other objects.
+
+```typescript
+abstract class Shape {
+    private _color: string;
+    constructor(color: string) {
+        this._color = color;
+    }
+    abstract get area(): number;
+    abstract get perimeter(): number;
+
+    get color() { return this._color }
+    set color(val: string) { this._color = val }
+
+    public toString(): string {
+        return `color: ${this.color}`;
+    }
+}
+
+class Circle extends Shape {
+    _radius: number;
+
+    constructor(color: string, radius: number) {
+        super(color); 
+        this._radius = radius;
+    }
+    
+    get radius() { return this._radius }
+    set radius(val: number) { this._radius = val }
+
+    get area(): number { return Math.PI * Math.pow(this._radius, 2) }
+    get perimeter(): number { return 2 * this._radius * Math.PI }
+
+    public toString(): string {
+        return `color: ${this.color}, radius: ${this.radius}`;
+    }
+}
+```
+
 * **Explain and demonstrate, how to implement your own events, how to emit events and how to listen for such events**
 
 ### ES6,7,8,ES-next and TypeScript

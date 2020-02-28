@@ -206,6 +206,29 @@ class Circle extends Shape {
 }
 ```
 * **Explain and demonstrate, how to implement your own events, how to emit events and how to listen for such events**
+> If there is no listener for the event, this code does nothing. If there are multiple listeners, they are all called, one after another, with the same arguments.
+```javascript
+const EventEmitter = require("events");
+const numbers = process.argv.slice(2).map(nas => Number(nas))
+class MyEventPublisher extends EventEmitter {
+    _numbers = [];
+    addNumber(number) {
+        this._numbers.push(number)
+        if (number % 2 === 0) {
+            this.emit("even", { number })
+        }
+        else {
+            this.emit("odd", { number })
+        }
+        if (number >= 100) {
+            this.emit("high", { number })
+        }
+        else {
+            this.emit("low", { number })
+        }
+    }
+}
+```
 
 ### ES6,7,8,ES-next and TypeScript
 * **Provide examples with es-next, running in a browser, using Babel and Webpack**

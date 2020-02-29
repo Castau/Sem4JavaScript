@@ -243,7 +243,47 @@ publisher.on("high", (n) => console.log(`HIGH: ${n.number}`))
 > With babel it's possible to write Javascript in ES6 or newer and have babel transpiling it to ES5 which is supported by most browsers. 
 > Typescript is a highlevel language on top of javascript and also comes with a transpiler like babel. 
 * **Provide a number of examples to demonstrate the benefits of using TypeScript, including, types,  interfaces, classes and generics**
-> See week5 (LINK)
+```typescript
+// interface and types
+interface IBook {
+    title: string
+    readonly author: string
+    published?: Date
+    pages?: number
+}
+
+// class
+class Book implements IBook {
+    constructor(private _title: string, private _author: string, private _published: Date, private _pages: number) { };
+
+    get title() { return this._title }
+    set title(val: string) { this._title = val }
+
+    get author() { return this._author }
+
+    get published() { return this._published }
+    set published(val: Date) { this._published = val }
+
+    get pages() { return this._pages }
+    set pages(val: number) { this._pages = val }
+}
+
+// generic function
+function reverseArr<T>(array : T[]){
+    return array.reverse()
+}
+
+// generic class
+class DataHolder<T> {
+    _t: T;
+    constructor(t: T) {
+        this._t = t;
+    }
+    
+    get value() { return this._t }
+    set value(val: T) { this._t = val }
+}
+```
 * **Explain the ECMAScript Proposal Process for how new features are added to the language (the TC39 Process)**
 > The TC39 is made up of members who are typically browser vendors and large companies who’ve invested heavily in the web. When a new proposal is created, that proposal has to go through certain stages before it becomes part of the official specification. It’s important to keep in mind that in order for any proposal to move from one stage to another, a consensus among the TC39 must be met. This means that a large majority must agree while nobody strongly disagrees enough to veto a specific proposal. Each new proposal starts off at Stage 0 and moves up through the different stages if the members choose so. If a proposal reaches and completes the final stage, the proposal is ready for inclusion in the formal ECMAScript standard. As of 2016, a new version of ECMAScript is released every year with whatever features are ready at that time. What that means is that any Stage 4 proposals that exist when a new release happens, will be included in the release for that year.
 https://medium.com/free-code-camp/ecmascript-tc39-and-the-history-of-javascript-26067498feb9 LINK

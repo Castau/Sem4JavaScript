@@ -1,4 +1,11 @@
 # Period 1 Learning Goals
+**Exercises done in this period**
+* [Week 1](https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/Week1)
+* [Week 2](https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/Week2)
+* [Week 3](https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/Week3)
+* [Week 4](https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/Week4)
+* [Week 5](https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/Week5)
+* [learnyounode](https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/learnyounode)
 
 ### Explain and Reflect:
 Explain the differences between Java and JavaScript and Java and node. Topics you could include:
@@ -17,7 +24,7 @@ Explain the differences between Java and JavaScript and Java and node. Topics yo
 * Explain generally about node.js, when it “makes sense” and npm, and how it “fits” into the node echo system.
 > Node.js is a Javascript runtime It's evented asynchronous non-blocking I/O build ontop of V8. The non-blocking I/O the best way to do I/O. This is based on an event loop and using asynchronous callbacks. It's a low level highly performant platform for doing any kind of I/O without having to write the entire thing in C from scratch. And it scales very well due to the non-blocking I/O. You want to use Node.js if you want to write highly scaling and efficient applications using non-blocking I/O whilst still having a high level scripting language available. Node.js’ package ecosystem, npm (Node package manager), is the largest ecosystem of open source libraries in the world. Npm has packages that can be used in applications to make the development faster and efficient.
 * **Explain about the Event Loop in JavaScript, including terms like: blocking, non-blocking, event loop, callback que and "other" API's Make sure to include why this is relevant for us as developers**
-> ![Alt Text](insert gif)
+> ![Event loop](https://github.com/Castau/Sem4JavaScript/tree/master/Images/eventloop.gif)
 > Javascript can only do one thing at one time, since Javascript is single-threaded language. All callbacks and asynchronous calls are handled by the web APIs or in node, the C++ APIs. This means that the code is put on the stack and executed, the callback is sent of to the APIs and the code can continue to run since the stack is clear. When the code handed to the API completes, it’s pushed to the stack queue. The event loop look at the stack and look at the task queue. If the stack is empty it takes the first thing on the queue and pushes it on to the stack which effectively run it. 
 * **Explain the terms JavaScript Engine (name at least one) and JavaScript Runtime Environment (name at least two)**
 >A Javascript engine is a program that executes Javascript code. The first Javascript engines were only interpreters (a program that directly executes code without requiring them previously to have been compiled into a machine language), but all relevant modern engines utilize just-in-time compilation (ia way of executing code that involves compilation during execution of a program – at run time – rather than before execution) for improved performance. In a browser, the Javascript engine runs in concert with the rendering engine via the Document Object Model. The use of Javascript engines is not limited to browsers. The Chrome V8 engine is a core component of the Node.js runtime system.
@@ -287,7 +294,8 @@ class DataHolder<T> {
 ```
 * **Explain the ECMAScript Proposal Process for how new features are added to the language (the TC39 Process)**
 > The TC39 is made up of members who are typically browser vendors and large companies who’ve invested heavily in the web. When a new proposal is created, that proposal has to go through certain stages before it becomes part of the official specification. It’s important to keep in mind that in order for any proposal to move from one stage to another, a consensus among the TC39 must be met. This means that a large majority must agree while nobody strongly disagrees enough to veto a specific proposal. Each new proposal starts off at Stage 0 and moves up through the different stages if the members choose so. If a proposal reaches and completes the final stage, the proposal is ready for inclusion in the formal ECMAScript standard. As of 2016, a new version of ECMAScript is released every year with whatever features are ready at that time. What that means is that any Stage 4 proposals that exist when a new release happens, will be included in the release for that year.
-https://medium.com/free-code-camp/ecmascript-tc39-and-the-history-of-javascript-26067498feb9 LINK
+  >* [Source](https://medium.com/free-code-camp/ecmascript-tc39-and-the-history-of-javascript-26067498feb9)
+
 ### Callbacks, Promises and async/await
 * **Explain about (ES-6) promises in JavaScript including, the problems they solve, a quick explanation of the Promise API and:**
 > A Promise represents the result of an operation that hasn't been completed yet, but will at some point in the future. An example of such an operation is the network request fetch. There is no way to determine when the response will be received. This can be problematic if other operations are dependent on the completion of fetch. Without Promises, we would have to use callbacks to deal with actions that need to happen in sequence. This isn't necessarily a problem if we there's one asynchronous action, but if we need to complete multiple asynchronous steps in sequence, callbacks become unmanageable and result in the infamous callback hell.

@@ -238,7 +238,8 @@ publisher.on("high", (n) => console.log(`HIGH: ${n.number}`))
 
 ### ES6,7,8,ES-next and TypeScript
 * **Provide examples with es-next, running in a browser, using Babel and Webpack**
-> I don't understand what I'm supposed to show in this question
+> I don't understand what I'm supposed to show in this question?
+> Exercises regarding babel and webpack can be found here:
 * **Explain the two strategies for improving JavaScript: Babel and ES6 (es2015) + ES-Next, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers**
 > With babel it's possible to write Javascript in ES6 or newer and have babel transpiling it to ES5 which is supported by most browsers. 
 > Typescript is a highlevel language on top of javascript and also comes with a transpiler like babel. 
@@ -279,7 +280,7 @@ class DataHolder<T> {
     constructor(t: T) {
         this._t = t;
     }
-    
+
     get value() { return this._t }
     set value(val: T) { this._t = val }
 }

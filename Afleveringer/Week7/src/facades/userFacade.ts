@@ -10,12 +10,12 @@ export class UserFacade {
         await new Promise((resolve, reject) => {
             bcrypt.hash(user.password, 10, (err:Error, hash:string) => {
                 if (err) {
-                    reject(err)
+                    reject(err);
                 } else {
                     user.password = hash;
                     users.push(user);
                     result = true;
-                    resolve(hash)
+                    resolve(hash);
                 }
             });
         })
@@ -46,9 +46,10 @@ export class UserFacade {
         await new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err:Error, res:boolean) => {
                 if (err) {
-                    console.log(err);
+                    reject(err);
                 } else {
                     result = res;
+                    resolve(res);
                 }
             });
         })

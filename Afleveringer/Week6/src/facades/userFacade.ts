@@ -1,10 +1,16 @@
+import IGameUser from '../interfaces/GameUser';
 const bcrypt = require('bcryptjs');
 const debug = require("debug")("game-case")
 
-export interface IGameUser { name: string, userName: string, password: string, role: string }
 
-export const users: Array<IGameUser> = [];
-export class UserFacade {
+export default class UserFacade {
+
+    public static users: Array<IGameUser> = [
+        { name: "Rigmor", userName: "rigmor@icc.dk", password: "void", role: "user" },
+        { name: "Silvia", userName: "silvia@icc.dk", password: "dragonslayer", role: "user" },
+        { name: "admin", userName: "lich@king.dk", password: "bolvar", role: "admin" }
+    ];
+
     static async addUser(user: IGameUser): Promise<boolean> {
         let result = false;
         await new Promise((resolve, reject) => {
@@ -13,35 +19,37 @@ export class UserFacade {
                     reject(err);
                 } else {
                     user.password = hash;
-                    users.push(user);
+                    UserFacade.users.push(user);
                     result = true;
                     resolve(hash);
                 }
             });
         })
-        debug('usersarray', users)
+        debug('usersarray', UserFacade.users)
         return result;
     }
-    static deleteUser(userName: string): boolean { 
-        const user = users.find(u => u.userName === userName);
+    static async deleteUser(userName: string): Promise<boolean> { 
+        const user = UserFacade.users.find(u => u.userName === userName);
         if(!user) return false
         else {
-            const index = users.indexOf(user);
-            users.splice(index, 1);
+            const index = UserFacade.users.indexOf(user);
+            UserFacade.users.splice(index, 1);
             return true
         }
     }
-    static getAllUsers(): Array<IGameUser> { 
-        return users;
+
+    static async getAllUsers(): Promise<Array<IGameUser>> { 
+        const allusers = await UserFacade.users;
+        return allusers
     }
-    static getUser(userName: string): IGameUser { 
-        const user = users.find(u => u.userName === userName);
+    static async getUser(userName: string): Promise<IGameUser> { 
+        const user = await UserFacade.users.find(u => u.userName === userName);
         if(user) return user
         else throw new Error('User not found')
     }
     static async checkUser(userName: string, password: string): Promise<boolean> {
         let result = false;
-        const user = users.find(u => u.userName === userName);
+        const user = UserFacade.users.find(u => u.userName === userName);
         if (!user) throw new Error('User not found')
         await new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err:Error, res:boolean) => {
@@ -56,3 +64,4 @@ export class UserFacade {
         return result;
     }
 }
+

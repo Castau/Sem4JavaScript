@@ -71,8 +71,6 @@ const MapScreen = props => {
         }
     };
 
-    console.log('teams ', teams)
-    console.log('log', teamMarkers())
     return (
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
             <View>

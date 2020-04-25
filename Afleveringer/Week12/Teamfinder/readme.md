@@ -1,1 +1,1 @@
-### Teamfinder App deployed (here)[https://expo.io/@castau/Teamfinder]
+### Teamfinder App deployed [here](https://expo.io/@castau/Teamfinder)

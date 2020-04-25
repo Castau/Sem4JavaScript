@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Week 12 app",
+    "githubUrl": "https://github.com/Castau/Sem4JavaScript/tree/master/Afleveringer/Week12/Teamfinder"
   }
 }
